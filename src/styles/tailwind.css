@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core System Colors */
+    --color-background: #0F0F0F; /* true black for video showcase */
+    --color-foreground: #FFFFFF; /* white for high contrast readability */
+    --color-border: #2D2D2D; /* subtle surface elevation */
+    --color-input: #252525; /* card backgrounds and content areas */
+    --color-ring: #D4AF37; /* selective gold for focus states */
+    --color-card: #252525; /* card backgrounds and content areas */
+    --color-card-foreground: #FFFFFF; /* white for card text */
+    --color-popover: #1A1A1A; /* deep studio black for overlays */
+    --color-popover-foreground: #FFFFFF; /* white for popover text */
+    --color-muted: #2D2D2D; /* subtle surface elevation */
+    --color-muted-foreground: #B8B8B8; /* supporting information and metadata */
+
+    /* Brand Colors */
+    --color-primary: #1A1A1A; /* deep studio black for premium canvas */
+    --color-primary-foreground: #FFFFFF; /* white for primary text */
+    --color-secondary: #2D2D2D; /* subtle surface elevation and depth */
+    --color-secondary-foreground: #FFFFFF; /* white for secondary text */
+    --color-accent: #D4AF37; /* selective gold for premium moments */
+    --color-accent-foreground: #1A1A1A; /* black for accent text */
+
+    /* Status Colors */
+    --color-destructive: #EF4444; /* clear problem identification */
+    --color-destructive-foreground: #FFFFFF; /* white for destructive text */
+    --color-success: #4ADE80; /* project completion and positive feedback */
+    --color-success-foreground: #1A1A1A; /* black for success text */
+    --color-warning: #F59E0B; /* timeline urgency without alarm */
+    --color-warning-foreground: #1A1A1A; /* black for warning text */
+    --color-error: #EF4444; /* clear problem identification and resolution */
+    --color-error-foreground: #FFFFFF; /* white for error text */
+
+    /* Additional Brand Colors */
+    --color-surface: #252525; /* card backgrounds and content areas */
+    --color-text-primary: #FFFFFF; /* high contrast for readability */
+    --color-text-secondary: #B8B8B8; /* supporting information and metadata */
+    --color-conversion: #FF6B35; /* energetic orange for CTAs */
+    --color-conversion-foreground: #FFFFFF; /* white for conversion text */
+    --color-trust: #2C5AA0; /* professional blue for credibility */
+    --color-trust-foreground: #FFFFFF; /* white for trust text */
+
+    /* Typography */
+    --font-headline: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Playfair Display', serif;
+
+    /* Spacing */
+    --spacing-base: 8px;
+    --spacing-rhythm: 1.5rem;
+
+    /* Shadows */
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    /* Animation */
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-micro: 0.2s ease-out;
+    --transition-cinematic: 0.8s ease-out;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
+    line-height: 1.2;
+  }
+
+  .font-accent {
+    font-family: var(--font-accent);
+  }
+}
+
+@layer components {
+  .cinematic-shadow {
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .premium-shadow {
+    box-shadow: var(--shadow-premium);
+  }
+
+  .smooth-transition {
+    transition: var(--transition-smooth);
+  }
+
+  .micro-transition {
+    transition: var(--transition-micro);
+  }
+
+  .cinematic-transition {
+    transition: var(--transition-cinematic);
+  }
+
+  .video-aspect {
+    aspect-ratio: 16 / 9;
+  }
+
+  .golden-ratio {
+    aspect-ratio: 1.618 / 1;
+  }
+}
