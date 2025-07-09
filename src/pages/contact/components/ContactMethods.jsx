@@ -2,25 +2,77 @@ import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const ContactMethods = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
   const [chatMessage, setChatMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState([
+    {
+      id: 1,
+      type: 'bot',
+      message: "Hi! I'm Ujjwal's AI assistant. I can help you with video editing questions and schedule consultations. What would you like to know?",
+      timestamp: new Date()
+    }
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showQuickReplies, setShowQuickReplies] = useState(true);
+
+  // AI Chatbot responses
+  const chatbotResponses = {
+    // Video editing questions
+    'pricing': {
+      message: "Our pricing varies based on project complexity. Basic editing starts at ₹2,500, professional packages at ₹4,500, and premium projects at ₹8,000+. Would you like me to schedule a free consultation to discuss your specific project?",
+      quickReplies: ['Schedule Consultation', 'View Portfolio', 'More Questions']
+    },
+    'timeline': {
+      message: "Project timelines depend on complexity: Basic edits (2-3 weeks), Professional projects (3-4 weeks), Premium content (4-6 weeks). Rush jobs available with expedite fees. What type of project do you have in mind?",
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Schedule Call']
+    },
+    'software': {
+      message: "I use Adobe Premiere Pro, DaVinci Resolve, VN, and CapCut for editing. I'm proficient in color grading, motion graphics, audio mixing, and creating content optimized for all social media platforms.",
+      quickReplies: ['View Portfolio', 'Technical Questions', 'Schedule Demo']
+    },
+    'services': {
+      message: "I offer: Corporate videos, Social media content, Brand storytelling, Training videos, Event coverage, Product showcases, and Client testimonials. Each service is customized to your brand and audience.",
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Get Quote']
+    },
+    'portfolio': {
+      message: "You can view my portfolio at /portfolio or check out my Instagram @ujjwal_kr_choudhary for latest work. I've worked with various clients including TechSolutions India, Spice Garden Restaurant, and more.",
+      quickReplies: ['View Portfolio', 'Instagram', 'Client Testimonials', 'Schedule Call']
+    },
+    'consultation': {
+      message: "I'd be happy to schedule a free 30-minute consultation! I can help you plan your project, discuss timeline, and provide a custom quote. What's the best time for you?",
+      quickReplies: ['Today', 'Tomorrow', 'This Week', 'Next Week']
+    },
+    'contact': {
+      message: "You can reach me at: 📧 ujjwalchoudhary994@gmail.com 📱 +91 8887967394 📍 Tulip Lemon, sector-69, Gurugram, HARYANA. I'm available Mon-Sat, 9AM-6PM IST.",
+      quickReplies: ['Send Email', 'Call Now', 'Schedule Meeting', 'More Info']
+    }
+  };
+
+  // Quick reply options for initial chat
+  const initialQuickReplies = [
+    'Pricing & Packages',
+    'Project Timeline',
+    'Software & Tools',
+    'View Portfolio',
+    'Schedule Consultation',
+    'Contact Info'
+  ];
 
   const contactMethods = [
     {
       icon: 'Phone',
       title: 'Phone Call',
       description: 'Immediate consultation available',
-      detail: '+1 (555) 123-4567',
+      detail: '+91 8887967394',
       action: 'Call Now',
-      availability: 'Mon-Fri, 9AM-6PM EST',
+      availability: 'Mon-Sat, 9AM-6PM IST',
       color: 'text-success'
     },
     {
       icon: 'Mail',
       title: 'Email',
       description: 'Detailed project discussions',
-      detail: 'hello@videocraftstudio.com',
+      detail: 'ujjwalchoudhary994@gmail.com',
       action: 'Send Email',
       availability: '24-hour response time',
       color: 'text-trust'
@@ -29,7 +81,7 @@ const ContactMethods = () => {
       icon: 'MessageCircle',
       title: 'Live Chat',
       description: 'Quick questions & support',
-      detail: 'Instant messaging available',
+      detail: 'AI Assistant Available',
       action: 'Start Chat',
       availability: 'Online now',
       color: 'text-conversion'
@@ -38,7 +90,7 @@ const ContactMethods = () => {
       icon: 'MapPin',
       title: 'Studio Visit',
       description: 'In-person consultation',
-      detail: '123 Creative Ave, Studio City, CA',
+      detail: 'Tulip Lemon, sector-69, Gurugram, HARYANA',
       action: 'Get Directions',
       availability: 'By appointment only',
       color: 'text-accent'
@@ -47,13 +99,114 @@ const ContactMethods = () => {
 
   const handleChatToggle = () => {
     setIsChatOpen(!isChatOpen);
+    if (!isChatOpen) {
+      setChatHistory([
+        {
+          id: 1,
+          type: 'bot',
+          message: "Hi! I'm Ujjwal's AI assistant. I can help you with video editing questions and schedule consultations. What would you like to know?",
+          timestamp: new Date()
+        }
+      ]);
+      setShowQuickReplies(true);
+    }
+  };
+
+  const processMessage = (message) => {
+    const lowerMessage = message.toLowerCase();
+    let response = null;
+
+    // Check for keywords and provide appropriate responses
+    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate')) {
+      response = chatbotResponses.pricing;
+    } else if (lowerMessage.includes('time') || lowerMessage.includes('duration') || lowerMessage.includes('how long')) {
+      response = chatbotResponses.timeline;
+    } else if (lowerMessage.includes('software') || lowerMessage.includes('tool') || lowerMessage.includes('premiere') || lowerMessage.includes('davinci')) {
+      response = chatbotResponses.software;
+    } else if (lowerMessage.includes('service') || lowerMessage.includes('what do you do') || lowerMessage.includes('offer')) {
+      response = chatbotResponses.services;
+    } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('sample')) {
+      response = chatbotResponses.portfolio;
+    } else if (lowerMessage.includes('consult') || lowerMessage.includes('meet') || lowerMessage.includes('schedule')) {
+      response = chatbotResponses.consultation;
+    } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
+      response = chatbotResponses.contact;
+    } else {
+      // Default response for unrecognized queries
+      response = {
+        message: "I understand you're asking about video editing. Could you be more specific? I can help with pricing, timelines, software, services, or scheduling a consultation.",
+        quickReplies: ['Pricing', 'Timeline', 'Services', 'Schedule Consultation']
+      };
+    }
+
+    return response;
   };
 
   const handleSendMessage = () => {
     if (chatMessage.trim()) {
-      alert(`Message sent: "${chatMessage}". We'll respond shortly!`);
+      // Add user message to chat
+      const userMessage = {
+        id: Date.now(),
+        type: 'user',
+        message: chatMessage,
+        timestamp: new Date()
+      };
+      
+      setChatHistory(prev => [...prev, userMessage]);
       setChatMessage('');
-      setIsChatOpen(false);
+      setIsTyping(true);
+      setShowQuickReplies(false);
+
+      // Simulate AI processing
+      setTimeout(() => {
+        const response = processMessage(chatMessage);
+        const botMessage = {
+          id: Date.now() + 1,
+          type: 'bot',
+          message: response.message,
+          timestamp: new Date(),
+          quickReplies: response.quickReplies
+        };
+        
+        setChatHistory(prev => [...prev, botMessage]);
+        setIsTyping(false);
+        setShowQuickReplies(true);
+      }, 1000);
+    }
+  };
+
+  const handleQuickReply = (reply) => {
+    const response = processMessage(reply);
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      message: reply,
+      timestamp: new Date()
+    };
+    
+    setChatHistory(prev => [...prev, userMessage]);
+    setIsTyping(true);
+    setShowQuickReplies(false);
+
+    setTimeout(() => {
+      const botMessage = {
+        id: Date.now() + 1,
+        type: 'bot',
+        message: response.message,
+        timestamp: new Date(),
+        quickReplies: response.quickReplies
+      };
+      
+      setChatHistory(prev => [...prev, botMessage]);
+      setIsTyping(false);
+      setShowQuickReplies(true);
+    }, 1000);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
   };
 
@@ -97,7 +250,17 @@ const ContactMethods = () => {
                 size="sm"
                 fullWidth
                 className={`border-${method.color.split('-')[1]} text-${method.color.split('-')[1]} hover:bg-${method.color.split('-')[1]}/10`}
-                onClick={method.title === 'Live Chat' ? handleChatToggle : undefined}
+                onClick={() => {
+                  if (method.title === 'Live Chat') {
+                    handleChatToggle();
+                  } else if (method.title === 'Phone Call') {
+                    window.location.href = 'tel:+918887967394';
+                  } else if (method.title === 'Email') {
+                    window.location.href = 'mailto:ujjwalchoudhary994@gmail.com';
+                  } else if (method.title === 'Studio Visit') {
+                    window.open('https://www.google.com/maps/search/Tulip+Lemon+sector-69+Gurugram+HARYANA', '_blank');
+                  }
+                }}
               >
                 {method.action}
               </Button>
@@ -127,8 +290,8 @@ const ContactMethods = () => {
               <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Zap" size={24} className="text-success" />
               </div>
-              <div className="text-2xl font-bold text-success mb-2">15 min</div>
-              <div className="text-sm text-text-secondary">Live Chat Response</div>
+              <div className="text-2xl font-bold text-success mb-2">Instant</div>
+              <div className="text-sm text-text-secondary">AI Chat Response</div>
             </div>
             
             <div className="text-center">
@@ -149,16 +312,16 @@ const ContactMethods = () => {
           </div>
         </div>
 
-        {/* Live Chat Widget */}
+        {/* Enhanced AI Chat Widget */}
         {isChatOpen && (
-          <div className="fixed bottom-6 right-6 w-80 bg-card rounded-2xl cinematic-shadow border border-border z-50">
+          <div className="fixed bottom-6 right-6 w-96 bg-card rounded-2xl cinematic-shadow border border-border z-50">
             <div className="flex items-center justify-between p-4 border-b border-border">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-conversion rounded-full flex items-center justify-center">
                   <Icon name="MessageCircle" size={16} className="text-white" />
                 </div>
                 <div>
-                  <div className="font-medium text-foreground">Live Chat</div>
+                  <div className="font-medium text-foreground">AI Assistant</div>
                   <div className="text-xs text-success">Online now</div>
                 </div>
               </div>
@@ -172,12 +335,48 @@ const ContactMethods = () => {
               </Button>
             </div>
             
-            <div className="p-4 h-64 overflow-y-auto">
-              <div className="bg-muted rounded-lg p-3 mb-4">
-                <div className="text-sm text-foreground">
-                  Hi! I'm here to help with any questions about your video project. What can I assist you with today?
+            <div className="p-4 h-80 overflow-y-auto">
+              {chatHistory.map((msg) => (
+                <div key={msg.id} className={`mb-4 ${msg.type === 'user' ? 'text-right' : 'text-left'}`}>
+                  <div className={`inline-block max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    msg.type === 'user' 
+                      ? 'bg-conversion text-conversion-foreground' 
+                      : 'bg-muted text-foreground'
+                  }`}>
+                    <div className="text-sm">{msg.message}</div>
+                    <div className="text-xs opacity-70 mt-1">
+                      {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+                  
+                  {/* Quick replies for bot messages */}
+                  {msg.type === 'bot' && msg.quickReplies && showQuickReplies && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {msg.quickReplies.map((reply, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleQuickReply(reply)}
+                          className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full hover:bg-accent/20 transition-colors"
+                        >
+                          {reply}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
+              ))}
+              
+              {isTyping && (
+                <div className="text-left mb-4">
+                  <div className="inline-block bg-muted text-foreground px-4 py-2 rounded-lg">
+                    <div className="flex items-center space-x-1">
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             
             <div className="p-4 border-t border-border">
@@ -187,7 +386,7 @@ const ContactMethods = () => {
                   placeholder="Type your message..."
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  onKeyPress={handleKeyPress}
                   className="flex-1 px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
                 />
                 <Button

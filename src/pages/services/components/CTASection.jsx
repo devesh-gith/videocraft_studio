@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
@@ -60,16 +61,18 @@ const CTASection = () => {
               </li>
             </ul>
             
-            <Button
-              variant="default"
-              fullWidth
-              className="bg-accent hover:bg-accent/90 text-primary"
-              iconName="Calendar"
-              iconPosition="left"
-              iconSize={16}
-            >
-              Book Free Consultation
-            </Button>
+            <Link to="/contact#consultation-booking">
+              <Button
+                variant="default"
+                fullWidth
+                className="bg-accent hover:bg-accent/90 text-primary"
+                iconName="Calendar"
+                iconPosition="left"
+                iconSize={16}
+              >
+                Book Free Consultation
+              </Button>
+            </Link>
           </div>
 
           {/* Instant Quote Card */}

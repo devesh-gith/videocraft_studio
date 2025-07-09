@@ -93,15 +93,17 @@ const Header = () => {
 
         {/* CTA Button & Mobile Menu Toggle */}
         <div className="flex items-center space-x-4">
-          <Button
-            variant="default"
-            className="hidden md:flex bg-conversion hover:bg-conversion/90 text-conversion-foreground"
-            iconName="Calendar"
-            iconPosition="left"
-            iconSize={16}
-          >
-            Start Project
-          </Button>
+          <Link to="/contact#consultation-booking">
+            <Button
+              variant="default"
+              className="hidden md:flex bg-conversion hover:bg-conversion/90 text-conversion-foreground"
+              iconName="Calendar"
+              iconPosition="left"
+              iconSize={16}
+            >
+              Start Project
+            </Button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
@@ -145,16 +147,18 @@ const Header = () => {
           ))}
           
           <div className="pt-4 mt-4 border-t border-border">
-            <Button
-              variant="default"
-              fullWidth
-              className="bg-conversion hover:bg-conversion/90 text-conversion-foreground"
-              iconName="Calendar"
-              iconPosition="left"
-              iconSize={16}
-            >
-              Start Your Project
-            </Button>
+            <Link to="/contact#consultation-booking">
+              <Button
+                variant="default"
+                fullWidth
+                className="bg-conversion hover:bg-conversion/90 text-conversion-foreground"
+                iconName="Calendar"
+                iconPosition="left"
+                iconSize={16}
+              >
+                Start Your Project
+              </Button>
+            </Link>
           </div>
         </nav>
       </div>

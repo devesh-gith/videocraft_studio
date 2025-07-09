@@ -25,9 +25,9 @@ const ServicesPage = () => {
         "Training and onboarding content"
       ],
       pricing: [
-        { name: "Basic", price: "$2,500", duration: "2-3 weeks" },
-        { name: "Professional", price: "$4,500", duration: "3-4 weeks" },
-        { name: "Premium", price: "$8,000", duration: "4-6 weeks" }
+        { name: "Basic", price: "₹2,500", duration: "2-3 weeks" },
+        { name: "Professional", price: "₹4,500", duration: "3-4 weeks" },
+        { name: "Premium", price: "₹8,000", duration: "4-6 weeks" }
       ],
       demo: {
         before: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=225&fit=crop",
@@ -53,9 +53,9 @@ const ServicesPage = () => {
         "Facebook video advertisements"
       ],
       pricing: [
-        { name: "Basic", price: "$800", duration: "1 week" },
-        { name: "Professional", price: "$1,500", duration: "1-2 weeks" },
-        { name: "Premium", price: "$2,800", duration: "2-3 weeks" }
+        { name: "Basic", price: "₹800", duration: "1 week" },
+        { name: "Professional", price: "₹1,500", duration: "1-2 weeks" },
+        { name: "Premium", price: "₹2,800", duration: "2-3 weeks" }
       ],
       demo: {
         before: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=225&fit=crop",
@@ -81,9 +81,9 @@ const ServicesPage = () => {
         "Impact and community stories"
       ],
       pricing: [
-        { name: "Basic", price: "$3,500", duration: "3-4 weeks" },
-        { name: "Professional", price: "$6,000", duration: "4-5 weeks" },
-        { name: "Premium", price: "$10,000", duration: "5-7 weeks" }
+        { name: "Basic", price: "₹3,500", duration: "3-4 weeks" },
+        { name: "Professional", price: "₹6,000", duration: "4-5 weeks" },
+        { name: "Premium", price: "₹10,000", duration: "5-7 weeks" }
       ],
       demo: {
         before: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=225&fit=crop",
@@ -109,9 +109,9 @@ const ServicesPage = () => {
         "Leadership development content"
       ],
       pricing: [
-        { name: "Basic", price: "$1,800", duration: "2-3 weeks" },
-        { name: "Professional", price: "$3,200", duration: "3-4 weeks" },
-        { name: "Premium", price: "$5,500", duration: "4-5 weeks" }
+        { name: "Basic", price: "₹1,800", duration: "2-3 weeks" },
+        { name: "Professional", price: "₹3,200", duration: "3-4 weeks" },
+        { name: "Premium", price: "₹5,500", duration: "4-5 weeks" }
       ],
       demo: {
         before: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=225&fit=crop",
@@ -137,9 +137,9 @@ const ServicesPage = () => {
         "Seasonal campaign content"
       ],
       pricing: [
-        { name: "Basic", price: "$2,000", duration: "1-2 weeks" },
-        { name: "Professional", price: "$3,800", duration: "2-3 weeks" },
-        { name: "Premium", price: "$6,500", duration: "3-4 weeks" }
+        { name: "Basic", price: "₹2,000", duration: "1-2 weeks" },
+        { name: "Professional", price: "₹3,800", duration: "2-3 weeks" },
+        { name: "Premium", price: "₹6,500", duration: "3-4 weeks" }
       ],
       demo: {
         before: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=225&fit=crop",

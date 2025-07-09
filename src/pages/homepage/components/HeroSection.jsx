@@ -11,20 +11,8 @@ const HeroSection = () => {
     {
       id: 1,
       title: "Corporate Brand Story",
-      videoUrl: "https://player.vimeo.com/video/76979871?autoplay=1&loop=1&muted=1&background=1",
+      videoUrl: "https://www.youtube.com/embed/1XbvYP1qbgA?autoplay=1&loop=1&mute=1&playlist=1XbvYP1qbgA",
       category: "Corporate"
-    },
-    {
-      id: 2,
-      title: "Social Media Campaign",
-      videoUrl: "https://player.vimeo.com/video/169599296?autoplay=1&loop=1&muted=1&background=1",
-      category: "Social Media"
-    },
-    {
-      id: 3,
-      title: "Product Launch",
-      videoUrl: "https://player.vimeo.com/video/158148793?autoplay=1&loop=1&muted=1&background=1",
-      category: "Brand Stories"
     }
   ];
 
@@ -105,7 +93,7 @@ const HeroSection = () => {
               </Button>
             </Link>
             
-            <Link to="/contact">
+            <Link to="/contact#consultation-booking">
               <Button
                 variant="default"
                 size="lg"

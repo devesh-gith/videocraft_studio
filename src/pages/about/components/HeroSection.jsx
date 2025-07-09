@@ -35,7 +35,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-              I'm Alex Rodriguez, a passionate video editor with over 8 years of experience transforming raw footage into compelling visual narratives that captivate audiences and drive results.
+              My name is Ujjwal and I'm an intermediate-level video editor using Premiere Pro, DaVinci Resolve, VN, CapCut, and more. I know various video editing tools and features.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -64,17 +64,16 @@ const HeroSection = () => {
           <div className="relative">
             <div className="relative aspect-video bg-card rounded-2xl overflow-hidden cinematic-shadow">
               <Image
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                alt="Alex Rodriguez in his editing studio"
+                src="/assets/images/Ujjwal.jpg"
                 className="w-full h-full object-cover"
               />
               
               {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm">
+              {/* <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm">
                 <button className="w-20 h-20 bg-accent hover:bg-accent/90 rounded-full flex items-center justify-center group smooth-transition">
                   <Icon name="Play" size={32} color="#1A1A1A" className="ml-1 group-hover:scale-110 smooth-transition" />
                 </button>
-              </div>
+              </div> */}
               
               {/* Video Controls Mockup */}
               <div className="absolute bottom-4 left-4 right-4 bg-background/80 backdrop-blur-md rounded-lg p-3">

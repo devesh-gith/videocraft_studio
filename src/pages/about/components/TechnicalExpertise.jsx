@@ -15,38 +15,38 @@ const TechnicalExpertise = () => {
   const software = [
     {
       name: "Adobe Premiere Pro",
-      proficiency: 95,
-      experience: "8 years",
-      certification: "Adobe Certified Expert",
-      description: "Primary editing platform for all video projects. Expert in advanced features, proxy workflows, and team collaboration.",
-      features: ["Multi-cam editing", "Advanced color correction", "Audio mixing", "Motion graphics integration"],
+      proficiency: 80,
+      experience: "3 years",
+      certification: "Intermediate",
+      description: "Versatile editing platform for all types of video projects. Comfortable with timeline editing, effects, and export workflows.",
+      features: ["Multi-cam editing", "Color correction", "Audio mixing", "Motion graphics integration", "Transitions", "Keyframing", "Speed ramping", "Subtitles"],
       icon: "Play"
     },
     {
       name: "DaVinci Resolve",
-      proficiency: 90,
-      experience: "5 years",
-      certification: "Certified Colorist",
-      description: "Professional color grading and finishing. Specialized in cinematic color workflows and HDR content.",
-      features: ["Professional color grading", "Fairlight audio", "Fusion VFX", "Collaborative workflows"],
+      proficiency: 70,
+      experience: "2 years",
+      certification: "Intermediate",
+      description: "Professional color grading and editing. Familiar with node-based color workflows and Fairlight audio.",
+      features: ["Color grading", "Fusion VFX", "Audio mixing", "Masking", "Timeline editing", "Transitions"],
       icon: "Palette"
     },
     {
-      name: "After Effects",
-      proficiency: 85,
-      experience: "6 years",
-      certification: "Adobe Certified",
-      description: "Motion graphics and visual effects. Creating custom animations and complex compositing work.",
-      features: ["Motion graphics", "Visual effects", "2D animation", "Compositing"],
-      icon: "Layers"
+      name: "VN Video Editor",
+      proficiency: 75,
+      experience: "2 years",
+      certification: "Intermediate",
+      description: "Mobile and desktop editor for quick edits, social media content, and creative effects.",
+      features: ["Transitions", "Speed ramping", "Filters", "Text overlays", "Music sync", "Templates"],
+      icon: "Smartphone"
     },
     {
-      name: "Final Cut Pro",
-      proficiency: 80,
-      experience: "4 years",
-      certification: "Apple Certified",
-      description: "High-performance editing for Mac-based workflows. Excellent for quick turnaround projects.",
-      features: ["Magnetic timeline", "Multicam sync", "Built-in effects", "Optimized performance"],
+      name: "CapCut",
+      proficiency: 75,
+      experience: "2 years",
+      certification: "Intermediate",
+      description: "Popular for social media video creation, effects, and quick edits.",
+      features: ["Auto-captions", "Filters", "Transitions", "Stickers", "Music library", "AI effects"],
       icon: "Film"
     }
   ];
@@ -351,12 +351,22 @@ const TechnicalExpertise = () => {
           </div>
           
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-foreground mb-6">
-            Tools, Skills & Innovation
+            Ujjwal – Intermediate Video Editor
           </h2>
-          
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive overview of the technical capabilities, equipment, and industry knowledge that powers exceptional video editing results.
+            I use Premiere Pro, DaVinci Resolve, VN, CapCut, and more. Comfortable with a wide range of video editing tools and features:
           </p>
+          <ul className="text-muted-foreground max-w-2xl mx-auto text-left list-disc pl-6 mt-4">
+            <li>Transitions & Effects</li>
+            <li>Color Grading & Correction</li>
+            <li>Keyframing & Animation</li>
+            <li>Masking & Layering</li>
+            <li>Speed Ramping</li>
+            <li>Audio Sync & Mixing</li>
+            <li>Subtitles & Captions</li>
+            <li>Export for Social Media</li>
+            <li>Templates & Presets</li>
+          </ul>
         </div>
 
         {/* Category Navigation */}

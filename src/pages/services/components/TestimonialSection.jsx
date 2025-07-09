@@ -8,9 +8,9 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Mitchell",
+      name: "Priya Sharma",
       role: "Marketing Director",
-      company: "TechFlow Solutions",
+      company: "TechFlow Solutions India",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
       service: "Corporate Video Production",
       rating: 5,
@@ -24,7 +24,7 @@ const TestimonialSection = () => {
     },
     {
       id: 2,
-      name: "Marcus Rodriguez",
+      name: "Rajesh Kumar",
       role: "Creative Director",
       company: "Bloom Digital Agency",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
@@ -40,9 +40,9 @@ const TestimonialSection = () => {
     },
     {
       id: 3,
-      name: "Jennifer Chen",
+      name: "Anjali Patel",
       role: "Brand Manager",
-      company: "EcoLife Products",
+      company: "EcoLife Products India",
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       service: "Brand Storytelling",
       rating: 5,
@@ -56,9 +56,9 @@ const TestimonialSection = () => {
     },
     {
       id: 4,
-      name: "David Thompson",
+      name: "Vikram Singh",
       role: "HR Director",
-      company: "Global Innovations Inc",
+      company: "Global Innovations India",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       service: "Training Video Production",
       rating: 5,

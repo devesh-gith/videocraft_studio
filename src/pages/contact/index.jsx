@@ -10,6 +10,7 @@ import LocationMap from './components/LocationMap';
 
 const Contact = () => {
   const [showBooking, setShowBooking] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleBookConsultation = () => {
     setShowBooking(true);
@@ -20,6 +21,10 @@ const Contact = () => {
         bookingSection.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
+  };
+
+  const handleStartChat = () => {
+    setIsChatOpen(true);
   };
 
   return (
@@ -38,10 +43,10 @@ const Contact = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <ContactHero onBookConsultation={handleBookConsultation} />
+        <ContactHero onBookConsultation={handleBookConsultation} onStartChat={handleStartChat} />
         
         {/* Contact Methods */}
-        <ContactMethods />
+        <ContactMethods isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
         
         {/* Project Brief Form */}
         <ContactForm />

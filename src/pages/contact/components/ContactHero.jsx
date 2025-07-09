@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const ContactHero = ({ onBookConsultation }) => {
+const ContactHero = ({ onBookConsultation, onStartChat }) => {
   return (
     <section className="relative bg-gradient-to-br from-background via-primary to-background py-20 lg:py-32 overflow-hidden">
       {/* Background Elements */}
@@ -52,6 +52,7 @@ const ContactHero = ({ onBookConsultation }) => {
               iconName="MessageCircle"
               iconPosition="left"
               iconSize={20}
+              onClick={onStartChat}
             >
               Start Live Chat
             </Button>
