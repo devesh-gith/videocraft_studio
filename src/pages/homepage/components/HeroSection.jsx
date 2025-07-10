@@ -10,9 +10,9 @@ const HeroSection = () => {
   const heroVideos = [
     {
       id: 1,
-      title: "Corporate Brand Story",
-      videoUrl: "https://www.youtube.com/embed/1XbvYP1qbgA?autoplay=1&loop=1&mute=1&playlist=1XbvYP1qbgA",
-      category: "Corporate"
+      title: "Portfolio Video",
+      videoUrl: "/assets/Videos/portfoliovideo.mp4",
+      category: "Portfolio"
     }
   ];
 
@@ -42,12 +42,13 @@ const HeroSection = () => {
                 index === currentVideoIndex ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <iframe
+              <video
                 src={video.videoUrl}
                 className="w-full h-full object-cover scale-105"
-                frameBorder="0"
-                allow="autoplay; fullscreen"
-                allowFullScreen
+                autoPlay
+                loop
+                muted
+                playsInline
                 title={video.title}
               />
             </div>
