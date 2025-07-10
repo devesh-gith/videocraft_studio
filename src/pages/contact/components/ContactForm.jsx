@@ -32,11 +32,11 @@ const ContactForm = () => {
   ];
 
   const budgetRanges = [
-    { value: '5k-10k', label: '$5,000 - $10,000' },
-    { value: '10k-25k', label: '$10,000 - $25,000' },
-    { value: '25k-50k', label: '$25,000 - $50,000' },
-    { value: '50k-100k', label: '$50,000 - $100,000' },
-    { value: '100k+', label: '$100,000+' },
+    { value: '5k-10k', label: '₹5,000 - ₹10,000' },
+    { value: '10k-25k', label: '₹10,000 - ₹25,000' },
+    { value: '25k-50k', label: '₹25,000 - ₹50,000' },
+    { value: '50k-100k', label: '₹50,000 - ₹100,000' },
+    { value: '100k+', label: '₹100,000+' },
     { value: 'discuss', label: 'Let\'s Discuss' }
   ];
 
@@ -107,34 +107,15 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
-    
     setIsSubmitting(true);
-    
-    // Simulate API call
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        projectType: '',
-        budget: '',
-        timeline: '',
-        message: '',
-        referenceFiles: null
-      });
-      
-      alert('Thank you! Your project brief has been submitted. We\'ll get back to you within 24 hours.');
-    } catch (error) {
-      alert('Something went wrong. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Instead of API call, open mailto link
+    const subject = encodeURIComponent('New Project Brief from ' + formData.name);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone}\nProject Type: ${formData.projectType}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nMessage: ${formData.message}`
+    );
+    window.location.href = `mailto:ujjwalchoudhary994@gmail.com?subject=${subject}&body=${body}`;
+    setIsSubmitting(false);
   };
 
   return (

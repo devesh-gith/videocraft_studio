@@ -7,13 +7,13 @@ const LocationMap = () => {
   const studioLng = -118.3957;
 
   const studioInfo = {
-    name: "VideoCraft Studio",
-    address: "123 Creative Avenue, Studio City, CA 91604",
-    phone: "+1 (555) 123-4567",
-    email: "hello@videocraftstudio.com",
+    name: "Ujjwal Kumar Choudhary",
+    address: "Tulip Lemon, sector-69, Gurugram, HARYANA",
+    phone: "+91 8887967394",
+    email: "ujjwalchoudhary994@gmail.com",
     hours: {
-      weekdays: "Monday - Friday: 9:00 AM - 6:00 PM",
-      weekend: "Saturday - Sunday: By Appointment Only"
+      weekdays: "Monday - Saturday: 9:00 AM - 6:00 PM",
+      weekend: "Sunday: By Appointment Only"
     },
     parking: "Free parking available in our private lot",
     accessibility: "Wheelchair accessible with elevator access"

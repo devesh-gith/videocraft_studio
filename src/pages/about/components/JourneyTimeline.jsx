@@ -7,54 +7,44 @@ const JourneyTimeline = () => {
 
   const timelineData = [
     {
-      year: 2016,
+      year: 2020,
       title: "The Beginning",
-      role: "Junior Video Editor",
-      company: "Creative Media Solutions",
-      description: "Started my journey in video editing with basic corporate videos and social media content. Learned the fundamentals of storytelling through visual media.",
-      achievements: ["Edited 50+ corporate videos", "Mastered Adobe Premiere Pro", "First client testimonial"],
+      role: "Video Editor",
+      company: "Clubs & Societies",
+      description: "Started my journey in video editing by working in various clubs and societies, learning the fundamentals of storytelling and editing through real projects and teamwork.",
+      achievements: ["Edited 20+ club videos", "Learned basics of Premiere Pro & VN", "First collaborative project"],
       image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: "Play"
     },
     {
-      year: 2018,
-      title: "Finding My Voice",
-      role: "Video Editor",
-      company: "Digital Storytellers Inc.",
-      description: "Developed expertise in narrative-driven content and began specializing in brand storytelling. First major campaign success with a viral video series.",
-      achievements: ["Created first viral video (2M+ views)", "Won \'Best Editing\' at Local Film Festival", "Expanded to motion graphics"],
+      year: 2021,
+      title: "Skill Building",
+      role: "Course Learner",
+      company: "Udemy & Online Platforms",
+      description: "Expanded my skills by completing multiple video editing courses on Udemy and other platforms, focusing on advanced techniques and creative workflows.",
+      achievements: ["Completed 5+ Udemy courses", "Learned color grading & keyframing", "Built a personal project portfolio"],
       image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: "Award"
     },
     {
-      year: 2020,
-      title: "Going Independent",
+      year: 2022,
+      title: "Freelancing",
       role: "Freelance Video Editor",
-      company: "VideoCraft Studio",
-      description: "Launched my own studio during the pandemic, focusing on helping businesses adapt to digital-first communication through compelling video content.",
-      achievements: ["Founded VideoCraft Studio", "100+ satisfied clients", "Specialized in remote collaboration"],
+      company: "Fiverr",
+      description: "Started freelancing on Fiverr, working with clients on diverse projects and applying my skills in real-world scenarios.",
+      achievements: ["Completed 30+ freelance projects", "5-star client reviews", "Expanded to DaVinci Resolve & CapCut"],
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: "Rocket"
     },
     {
-      year: 2022,
-      title: "Industry Recognition",
-      role: "Senior Video Editor",
-      company: "VideoCraft Studio",
-      description: "Gained recognition in the industry with multiple awards and began mentoring upcoming editors. Expanded services to include full video production.",
-      achievements: ["Adobe Certified Expert", "Webby Award Winner", "Featured in Video Pro Magazine"],
+      year: 2023,
+      title: "Creative Growth",
+      role: "Intermediate Video Editor",
+      company: "Personal & Client Projects",
+      description: "Continued to grow by taking on more complex projects, experimenting with new tools, and refining my creative process.",
+      achievements: ["Worked on brand videos", "Mastered speed ramping & masking", "Built a strong client base"],
       image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: "Trophy"
-    },
-    {
-      year: 2024,
-      title: "Master Storyteller",
-      role: "Creative Director",
-      company: "VideoCraft Studio",
-      description: "Today, I lead a team of creative professionals, pushing the boundaries of visual storytelling while maintaining the personal touch that defines our work.",
-      achievements: ["500+ projects completed", "Team of 5 specialists", "International client base"],
-      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      icon: "Crown"
     }
   ];
 
@@ -66,16 +56,16 @@ const JourneyTimeline = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Icon name="Clock" size={16} />
+            <Icon name="Timeline" size={16} />
             <span>My Journey</span>
           </div>
           
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-foreground mb-6">
-            8 Years of Creative Evolution
+            4 Years of Creative Revolution
           </h2>
           
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            From a curious beginner to an industry-recognized storyteller, every step has shaped my unique approach to video editing and client collaboration.
+            From a curious beginner to a confident freelancer, my journey has been shaped by hands-on work in clubs and societies, online learning on Udemy, and real-world experience freelancing on Fiverr.
           </p>
         </div>
 

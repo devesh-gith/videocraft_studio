@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/ui/Header';
 import BlogHero from './components/BlogHero';
@@ -261,116 +262,134 @@ const Blog = () => {
             onSearchChange={setSearchTerm}
           />
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content Area */}
-            <div className="lg:col-span-2">
-              {/* Featured Post */}
-              <FeaturedPost post={featuredPost} />
-
-              {/* Results Header */}
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h2 className="text-2xl font-headline font-bold text-foreground mb-2">
-                    {searchTerm ? `Search Results for "${searchTerm}"` : 
-                     activeCategory === 'all' ? 'Latest Articles' : 
-                     categories.find(cat => cat.id === activeCategory)?.name}
-                  </h2>
-                  <p className="text-text-secondary">
-                    {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'} found
-                  </p>
-                </div>
-
-                {/* Sort Options */}
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-text-secondary">Sort by:</span>
-                  <select className="bg-input border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent">
-                    <option>Latest</option>
-                    <option>Most Popular</option>
-                    <option>Most Commented</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Blog Posts Grid */}
-              {currentPosts.length > 0 ? (
-                <div className="grid md:grid-cols-2 gap-8 mb-12">
-                  {currentPosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-16">
-                  <Icon name="Search" size={48} className="text-text-secondary mx-auto mb-4" />
-                  <h3 className="text-xl font-headline font-semibold text-foreground mb-2">
-                    No articles found
-                  </h3>
-                  <p className="text-text-secondary mb-6">
-                    Try adjusting your search terms or browse different categories.
-                  </p>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setSearchTerm('');
-                      setActiveCategory('all');
-                    }}
-                  >
-                    Clear Filters
-                  </Button>
-                </div>
-              )}
-
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-center space-x-2">
-                  <Button
-                    variant="outline"
-                    disabled={currentPage === 1}
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    iconName="ChevronLeft"
-                    iconPosition="left"
-                    iconSize={16}
-                  >
-                    Previous
-                  </Button>
-                  
-                  <div className="flex items-center space-x-1">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={`w-10 h-10 rounded-lg font-medium smooth-transition ${
-                          currentPage === page
-                            ? 'bg-accent text-accent-foreground'
-                            : 'text-foreground hover:bg-muted'
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <Button
-                    variant="outline"
-                    disabled={currentPage === totalPages}
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    iconName="ChevronRight"
-                    iconPosition="right"
-                    iconSize={16}
-                  >
-                    Next
-                  </Button>
-                </div>
-              )}
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-8">
-              <NewsletterSubscription />
-              <TrendingTopics />
-              <PopularPosts />
-              <RecentComments />
+          {/* Real Video Editing Blogs from the Web */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-headline font-bold text-accent mb-4">Top Video Editing Blogs on the Web</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <a href="https://www.motionedits.com/whats-next-for-video-editing-top-trends-for-2025/" target="_blank" rel="noopener noreferrer" className="block bg-card border border-border rounded-xl p-6 hover:border-accent/50 smooth-transition">
+                <div className="font-semibold text-lg text-foreground mb-2">What’s Next for Video Editing? Top Trends for 2025</div>
+                <div className="text-sm text-muted-foreground mb-2">Motion Edits Blog</div>
+                <p className="text-text-secondary text-sm mb-2">Explore the latest trends in video editing for 2025, including AI-powered editing, VR/AR, 8K video, and more. Stay ahead with insights from industry experts.</p>
+                <span className="text-accent text-xs font-medium">Read on motionedits.com →</span>
+              </a>
+              <a href="https://lwks.com/blog/the-future-of-video-editing-trends-and-predictions" target="_blank" rel="noopener noreferrer" className="block bg-card border border-border rounded-xl p-6 hover:border-accent/50 smooth-transition">
+                <div className="font-semibold text-lg text-foreground mb-2">The Future of Video Editing: Trends and Predictions</div>
+                <div className="text-sm text-muted-foreground mb-2">Lightworks Blog</div>
+                <p className="text-text-secondary text-sm mb-2">A deep dive into how AI, VR/AR, cloud editing, and more are shaping the future of video editing. Essential reading for editors and creators.</p>
+                <span className="text-accent text-xs font-medium">Read on lwks.com →</span>
+              </a>
+              <a href="https://project-aeon.com/blogs/revolutionizing-video-editing-how-ai-is-transforming-the-landscape" target="_blank" rel="noopener noreferrer" className="block bg-card border border-border rounded-xl p-6 hover:border-accent/50 smooth-transition">
+                <div className="font-semibold text-lg text-foreground mb-2">How AI is Revolutionizing Video Editing</div>
+                <div className="text-sm text-muted-foreground mb-2">Project Aeon Blog</div>
+                <p className="text-text-secondary text-sm mb-2">Discover how AI is transforming video editing workflows, from automated enhancements to AI avatars and synthetic video creation.</p>
+                <span className="text-accent text-xs font-medium">Read on project-aeon.com →</span>
+              </a>
+              <a href="https://editorsbro.com/blog/best-9-tools-for-video-editing-in-2025" target="_blank" rel="noopener noreferrer" className="block bg-card border border-border rounded-xl p-6 hover:border-accent/50 smooth-transition">
+                <div className="font-semibold text-lg text-foreground mb-2">Best 9 Tools for Video Editing in 2025</div>
+                <div className="text-sm text-muted-foreground mb-2">EditorsBro Blog</div>
+                <p className="text-text-secondary text-sm mb-2">A curated list of the top video editing tools for 2025, including Adobe Premiere Pro, DaVinci Resolve, CapCut, and more. Perfect for editors of all levels.</p>
+                <span className="text-accent text-xs font-medium">Read on editorsbro.com →</span>
+              </a>
             </div>
           </div>
+
+          {/* Featured Post */}
+          <FeaturedPost post={featuredPost} />
+
+          {/* Results Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl font-headline font-bold text-foreground mb-2">
+                {searchTerm ? `Search Results for "${searchTerm}"` : 
+                 activeCategory === 'all' ? 'Latest Articles' : 
+                 categories.find(cat => cat.id === activeCategory)?.name}
+              </h2>
+              <p className="text-text-secondary">
+                {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'} found
+              </p>
+            </div>
+
+            {/* Sort Options */}
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-text-secondary">Sort by:</span>
+              <select className="bg-input border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent">
+                <option>Latest</option>
+                <option>Most Popular</option>
+                <option>Most Commented</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Blog Posts Grid */}
+          {currentPosts.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {currentPosts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <Icon name="Search" size={48} className="text-text-secondary mx-auto mb-4" />
+              <h3 className="text-xl font-headline font-semibold text-foreground mb-2">
+                No articles found
+              </h3>
+              <p className="text-text-secondary mb-6">
+                Try adjusting your search terms or browse different categories.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchTerm('');
+                  setActiveCategory('all');
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center space-x-2">
+              <Button
+                variant="outline"
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                iconName="ChevronLeft"
+                iconPosition="left"
+                iconSize={16}
+              >
+                Previous
+              </Button>
+              
+              <div className="flex items-center space-x-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-10 h-10 rounded-lg font-medium smooth-transition ${
+                      currentPage === page
+                        ? 'bg-accent text-accent-foreground'
+                        : 'text-foreground hover:bg-muted'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+              
+              <Button
+                variant="outline"
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                iconName="ChevronRight"
+                iconPosition="right"
+                iconSize={16}
+              >
+                Next
+              </Button>
+            </div>
+          )}
         </main>
 
         {/* Footer CTA */}
@@ -383,15 +402,17 @@ const Blog = () => {
               Let's discuss how professional video editing can elevate your brand and engage your audience.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button
-                variant="default"
-                className="bg-conversion hover:bg-conversion/90 text-conversion-foreground"
-                iconName="Calendar"
-                iconPosition="left"
-                iconSize={16}
-              >
-                Schedule Consultation
-              </Button>
+              <Link to="/contact#consultation-booking">
+                <Button
+                  variant="default"
+                  className="bg-conversion hover:bg-conversion/90 text-conversion-foreground"
+                  iconName="Calendar"
+                  iconPosition="left"
+                  iconSize={16}
+                >
+                  Schedule Consultation
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 iconName="Play"

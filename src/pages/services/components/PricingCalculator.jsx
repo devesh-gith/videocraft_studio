@@ -177,7 +177,7 @@ const PricingCalculator = () => {
                         />
                         <span className="text-sm font-medium text-foreground">{addOn.label}</span>
                       </div>
-                      <span className="text-sm text-accent font-semibold">+${addOn.price}</span>
+                      <span className="text-sm text-accent font-semibold">+₹{addOn.price}</span>
                     </div>
                   ))}
                 </div>
@@ -211,7 +211,7 @@ const PricingCalculator = () => {
 
             <div className="text-center mb-8">
               <div className="text-5xl font-headline font-bold text-foreground mb-2">
-                ${estimatedCost.toLocaleString()}
+                ₹{estimatedCost.toLocaleString()}
               </div>
               <div className="text-sm text-muted-foreground">
                 Starting from this estimate

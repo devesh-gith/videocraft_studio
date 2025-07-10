@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import { Link } from 'react-router-dom';
 
 const ServiceHero = () => {
   return (
@@ -32,25 +33,29 @@ const ServiceHero = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
-          <Button
-            variant="default"
-            className="bg-conversion hover:bg-conversion/90 text-conversion-foreground px-8 py-4 text-lg"
-            iconName="Calendar"
-            iconPosition="left"
-            iconSize={20}
-          >
-            Start Your Project
-          </Button>
+          <Link to="/contact#consultation-booking">
+            <Button
+              variant="default"
+              className="bg-conversion hover:bg-conversion/90 text-conversion-foreground px-8 py-4 text-lg"
+              iconName="Calendar"
+              iconPosition="left"
+              iconSize={20}
+            >
+              Start Your Project
+            </Button>
+          </Link>
           
-          <Button
-            variant="outline"
-            className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg"
-            iconName="Play"
-            iconPosition="left"
-            iconSize={20}
-          >
-            View Our Work
-          </Button>
+          <Link to="/portfolio">
+            <Button
+              variant="outline"
+              className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg"
+              iconName="Play"
+              iconPosition="left"
+              iconSize={20}
+            >
+              View Our Work
+            </Button>
+          </Link>
         </div>
 
         {/* Stats */}

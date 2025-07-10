@@ -96,19 +96,19 @@ const FAQ = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
             <a 
-              href="mailto:hello@videocraftstudio.com"
+              href="mailto:ujjwalchoudhary994@gmail.com"
               className="inline-flex items-center space-x-2 text-accent hover:text-accent/80 smooth-transition"
             >
               <Icon name="Mail" size={16} />
-              <span>hello@videocraftstudio.com</span>
+              <span>ujjwalchoudhary994@gmail.com</span>
             </a>
             <span className="hidden sm:block text-text-secondary">•</span>
             <a 
-              href="tel:+15551234567"
+              href="tel:+918887967394"
               className="inline-flex items-center space-x-2 text-accent hover:text-accent/80 smooth-transition"
             >
               <Icon name="Phone" size={16} />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 8887967394</span>
             </a>
           </div>
         </div>

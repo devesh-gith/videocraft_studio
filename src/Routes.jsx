@@ -9,6 +9,7 @@ import Contact from "pages/contact";
 import Services from "pages/services";
 import About from "pages/about";
 import NotFound from "pages/NotFound";
+import PortfolioPage from "pages/portfolio";
 
 const Routes = () => {
   return (
@@ -23,6 +24,7 @@ const Routes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

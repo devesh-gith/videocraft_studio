@@ -123,7 +123,7 @@ const CreativeProcessTeaser = () => {
           </div>
 
           {/* Right Side - Visual Transformation */}
-          <div className="relative">
+          <div className="relative self-start">
             <div 
               className="relative"
               style={{
@@ -205,34 +205,6 @@ const CreativeProcessTeaser = () => {
               {/* Floating Elements */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-accent/20 rounded-full animate-pulse" />
               <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-conversion/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="bg-card rounded-xl p-8 cinematic-shadow max-w-2xl mx-auto">
-            <h3 className="text-2xl font-headline font-bold text-foreground mb-4">
-              Ready to Transform Your Vision?
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Let's discuss your project and create something extraordinary together
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/services">
-                <button className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 rounded-lg font-semibold smooth-transition inline-flex items-center space-x-2">
-                  <Icon name="Settings" size={18} />
-                  <span>View Services</span>
-                </button>
-              </Link>
-              
-              <Link to="/contact">
-                <button className="bg-conversion hover:bg-conversion/90 text-conversion-foreground px-6 py-3 rounded-lg font-semibold smooth-transition inline-flex items-center space-x-2">
-                  <Icon name="MessageCircle" size={18} />
-                  <span>Start Discussion</span>
-                </button>
-              </Link>
             </div>
           </div>
         </div>
