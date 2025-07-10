@@ -19,7 +19,7 @@ const FAQ = () => {
     },
     {
       question: "How many revisions are included?",
-      answer: `All projects include 3 rounds of revisions at no additional cost. This covers script changes, editing adjustments, color correction, and audio refinements. Additional revisions are available at $150/hour. I encourage detailed feedback to maximize your included revisions.`
+      answer: `All projects include 3 rounds of revisions at no additional cost. This covers script changes, editing adjustments, color correction, and audio refinements. Additional revisions are available at ₹12,500/hour. I encourage detailed feedback to maximize your included revisions.`
     },
     {
       question: "What file formats do you deliver?",
@@ -35,7 +35,7 @@ const FAQ = () => {
     },
     {
       question: "How do you handle project payments?",
-      answer: `Payment structure:\n• 50% deposit to begin work\n• 25% at rough cut approval\n• 25% upon final delivery\n\nI accept bank transfers, checks, and major credit cards. Net 15 terms for established clients. All pricing is in USD and includes standard revisions.`
+      answer: `Payment structure:\n• 50% deposit to begin work\n• 25% at rough cut approval\n• 25% upon final delivery\n\nI accept bank transfers, checks, and major credit cards. Net 15 terms for established clients. All pricing is in INR and includes standard revisions.`
     }
   ];
 

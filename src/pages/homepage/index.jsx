@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import HeroSection from './components/HeroSection';
 import ProjectPreviewGrid from './components/ProjectPreviewGrid';
 import CreativeProcessTeaser from './components/CreativeProcessTeaser';
@@ -31,6 +32,8 @@ const Homepage = () => {
         {/* Recent Recognition & Awards */}
         <RecentRecognition />
       </main>
+      
+      <Footer />
     </div>
   );
 };

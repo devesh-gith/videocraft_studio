@@ -10,6 +10,9 @@ import Services from "pages/services";
 import About from "pages/about";
 import NotFound from "pages/NotFound";
 import PortfolioPage from "pages/portfolio";
+import PrivacyPolicy from "pages/privacy-policy";
+import TermsOfService from "pages/terms-of-service";
+import CookiePolicy from "pages/cookie-policy";
 
 const Routes = () => {
   return (
@@ -25,6 +28,9 @@ const Routes = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

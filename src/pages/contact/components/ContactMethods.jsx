@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
@@ -8,53 +9,108 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
     {
       id: 1,
       type: 'bot',
-      message: "Hi! I'm Ujjwal's AI assistant. I can help you with video editing questions and schedule consultations. What would you like to know?",
+      message: "Hi! 👋 I'm Ujjwal's AI assistant. I can help you with video editing questions, project planning, and scheduling consultations. What would you like to know today?",
       timestamp: new Date()
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const [showQuickReplies, setShowQuickReplies] = useState(true);
+  const [userContext, setUserContext] = useState({
+    projectType: null,
+    budget: null,
+    timeline: null,
+    experience: null
+  });
+  const [conversationStep, setConversationStep] = useState('initial');
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  // AI Chatbot responses
+  // Enhanced AI Chatbot responses with context awareness
   const chatbotResponses = {
     // Video editing questions
     'pricing': {
-      message: "Our pricing varies based on project complexity. Basic editing starts at ₹2,500, professional packages at ₹4,500, and premium projects at ₹8,000+. Would you like me to schedule a free consultation to discuss your specific project?",
-      quickReplies: ['Schedule Consultation', 'View Portfolio', 'More Questions']
+      message: (context) => {
+        if (context.projectType) {
+          const pricing = {
+            'corporate': '₹4,500 - ₹12,000',
+            'social': '₹2,500 - ₹8,000',
+            'brand': '₹6,000 - ₹15,000',
+            'training': '₹3,500 - ₹10,000',
+            'event': '₹5,000 - ₹12,000'
+          };
+          return `For ${context.projectType} videos, pricing typically ranges from ${pricing[context.projectType] || '₹2,500 - ₹15,000'}. This includes 3 rounds of revisions and final delivery. Would you like a detailed quote for your specific project?`;
+        }
+        return "Our pricing varies based on project complexity: 🎬 Basic editing starts at ₹2,500, 🚀 Professional packages at ₹4,500, and ⭐ Premium projects at ₹8,000+. Each includes 3 revision rounds. What type of project are you planning?";
+      },
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Get Detailed Quote', 'View Portfolio']
     },
     'timeline': {
-      message: "Project timelines depend on complexity: Basic edits (2-3 weeks), Professional projects (3-4 weeks), Premium content (4-6 weeks). Rush jobs available with expedite fees. What type of project do you have in mind?",
-      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Schedule Call']
+      message: (context) => {
+        if (context.projectType) {
+          const timelines = {
+            'corporate': '3-4 weeks',
+            'social': '2-3 weeks',
+            'brand': '4-6 weeks',
+            'training': '3-5 weeks',
+            'event': '2-4 weeks'
+          };
+          return `For ${context.projectType} videos, typical timeline is ${timelines[context.projectType] || '2-4 weeks'}. Rush jobs available with expedite fees. What's your preferred timeline?`;
+        }
+        return "Project timelines depend on complexity: ⚡ Basic edits (2-3 weeks), 🚀 Professional projects (3-4 weeks), ⭐ Premium content (4-6 weeks). Rush jobs available with expedite fees. What type of project do you have in mind?";
+      },
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Rush Job', 'Schedule Call']
     },
     'software': {
-      message: "I use Adobe Premiere Pro, DaVinci Resolve, VN, and CapCut for editing. I'm proficient in color grading, motion graphics, audio mixing, and creating content optimized for all social media platforms.",
-      quickReplies: ['View Portfolio', 'Technical Questions', 'Schedule Demo']
+      message: "I use industry-standard software: 🎬 Adobe Premiere Pro for editing, 🎨 DaVinci Resolve for color grading, 📱 VN and CapCut for mobile content. I'm proficient in motion graphics, audio mixing, and creating content optimized for all social media platforms. Want to see examples of my work?",
+      quickReplies: ['View Portfolio', 'Technical Demo', 'Software Questions', 'Schedule Consultation']
     },
     'services': {
-      message: "I offer: Corporate videos, Social media content, Brand storytelling, Training videos, Event coverage, Product showcases, and Client testimonials. Each service is customized to your brand and audience.",
-      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Get Quote']
+      message: "I offer comprehensive video services: 🏢 Corporate videos & presentations, 📱 Social media content & reels, 🎯 Brand storytelling & commercials, 📚 Training & educational videos, 🎉 Event coverage & highlights, 📦 Product showcases & demos, 💬 Client testimonials & case studies. Each service is customized to your brand and audience. Which service interests you most?",
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Training Video', 'Event Coverage', 'Get Quote']
     },
     'portfolio': {
-      message: "You can view my portfolio at /portfolio or check out my Instagram @ujjwal_kr_choudhary for latest work. I've worked with various clients including TechSolutions India, Spice Garden Restaurant, and more.",
-      quickReplies: ['View Portfolio', 'Instagram', 'Client Testimonials', 'Schedule Call']
+      message: "Check out my latest work! 🎬 View my portfolio at /portfolio or follow my Instagram @ujjwal_kr_choudhary for daily updates. I've worked with TechSolutions India, Spice Garden Restaurant, and many other amazing clients. Would you like to see specific examples of your project type?",
+      quickReplies: ['View Portfolio', 'Instagram', 'Client Testimonials', 'Similar Projects', 'Schedule Call']
     },
     'consultation': {
-      message: "I'd be happy to schedule a free 30-minute consultation! I can help you plan your project, discuss timeline, and provide a custom quote. What's the best time for you?",
-      quickReplies: ['Today', 'Tomorrow', 'This Week', 'Next Week']
+      message: "Perfect! I'd love to schedule a free 30-minute consultation! 🗓️ We'll discuss your project goals, timeline, budget, and I'll provide a custom quote. I'm available Mon-Sat, 9AM-6PM IST. What works best for you?",
+      quickReplies: ['Today', 'Tomorrow', 'This Week', 'Next Week', 'Send Calendar Link']
     },
     'contact': {
-      message: "You can reach me at: 📧 ujjwalchoudhary994@gmail.com 📱 +91 8887967394 📍 Tulip Lemon, sector-69, Gurugram, HARYANA. I'm available Mon-Sat, 9AM-6PM IST.",
-      quickReplies: ['Send Email', 'Call Now', 'Schedule Meeting', 'More Info']
+      message: "Here's how to reach me: 📧 Email: ujjwalchoudhary994@gmail.com 📱 Phone: +91 8887967394 📍 Studio: Tulip Lemon, sector-69, Gurugram, HARYANA ⏰ Available: Mon-Sat, 9AM-6PM IST. I typically respond within 2 hours during business hours!",
+      quickReplies: ['Send Email', 'Call Now', 'Schedule Meeting', 'Get Directions', 'More Info']
+    },
+    'project_brief': {
+      message: "Great! Let me help you plan your project. 📋 I'll ask a few questions to understand your needs better. What type of video are you looking to create?",
+      quickReplies: ['Corporate Video', 'Social Media', 'Brand Story', 'Training Video', 'Event Coverage', 'Other']
+    },
+    'budget_planning': {
+      message: (context) => {
+        if (context.budget) {
+          return `Perfect! With a budget of ${context.budget}, I can recommend the best approach for your project. Would you like me to suggest a package that fits your budget?`;
+        }
+        return "Budget planning is crucial for getting the best value! 💰 What's your budget range for this project? This helps me recommend the right package and services.";
+      },
+      quickReplies: ['₹5,000 - ₹10,000', '₹10,000 - ₹25,000', '₹25,000 - ₹50,000', '₹50,000+', 'Need Guidance']
+    },
+    'testimonials': {
+      message: "Here's what my clients say: ⭐ 'Ujjwal transformed our brand video beyond expectations' - TechSolutions India ⭐ 'Professional, creative, and delivered on time' - Spice Garden Restaurant ⭐ 'Amazing work on our social media content' - Fashion Brand. Want to see more testimonials or discuss your project?",
+      quickReplies: ['View More Testimonials', 'Similar Projects', 'Schedule Consultation', 'Get Quote']
+    },
+    'rush_job': {
+      message: "Need it fast? ⚡ I offer rush job services with expedited timelines. Rush fees typically add 25-50% to the base price depending on urgency. What's your timeline requirement?",
+      quickReplies: ['1-2 Days', '1 Week', '2 Weeks', 'Regular Timeline', 'Get Quote']
     }
   };
 
-  // Quick reply options for initial chat
+  // Enhanced quick reply options for initial chat
   const initialQuickReplies = [
     'Pricing & Packages',
     'Project Timeline',
     'Software & Tools',
     'View Portfolio',
     'Schedule Consultation',
+    'Project Brief',
+    'Client Testimonials',
     'Contact Info'
   ];
 
@@ -97,6 +153,12 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
     }
   ];
 
+  // Analytics tracking
+  const trackConversation = (action, data) => {
+    // In a real implementation, this would send data to analytics
+    console.log('Chat Analytics:', { action, data, timestamp: new Date() });
+  };
+
   const handleChatToggle = () => {
     setIsChatOpen(!isChatOpen);
     if (!isChatOpen) {
@@ -104,38 +166,95 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
         {
           id: 1,
           type: 'bot',
-          message: "Hi! I'm Ujjwal's AI assistant. I can help you with video editing questions and schedule consultations. What would you like to know?",
+          message: "Hi! 👋 I'm Ujjwal's AI assistant. I can help you with video editing questions, project planning, and scheduling consultations. What would you like to know today?",
           timestamp: new Date()
         }
       ]);
       setShowQuickReplies(true);
+      setUserContext({
+        projectType: null,
+        budget: null,
+        timeline: null,
+        experience: null
+      });
+      setConversationStep('initial');
+      trackConversation('chat_started', {});
+    } else {
+      trackConversation('chat_closed', { 
+        conversationLength: chatHistory.length,
+        userContext 
+      });
     }
   };
 
+  // Enhanced message processing with context awareness
   const processMessage = (message) => {
     const lowerMessage = message.toLowerCase();
     let response = null;
+    let newContext = { ...userContext };
 
-    // Check for keywords and provide appropriate responses
-    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate')) {
+    // Update context based on user input
+    if (lowerMessage.includes('corporate') || lowerMessage.includes('business')) {
+      newContext.projectType = 'corporate';
+    } else if (lowerMessage.includes('social') || lowerMessage.includes('instagram') || lowerMessage.includes('reel')) {
+      newContext.projectType = 'social';
+    } else if (lowerMessage.includes('brand') || lowerMessage.includes('commercial')) {
+      newContext.projectType = 'brand';
+    } else if (lowerMessage.includes('training') || lowerMessage.includes('educational')) {
+      newContext.projectType = 'training';
+    } else if (lowerMessage.includes('event') || lowerMessage.includes('wedding') || lowerMessage.includes('party')) {
+      newContext.projectType = 'event';
+    }
+
+    // Budget detection
+    if (lowerMessage.includes('₹5,000') || lowerMessage.includes('5000')) {
+      newContext.budget = '₹5,000 - ₹10,000';
+    } else if (lowerMessage.includes('₹10,000') || lowerMessage.includes('10000')) {
+      newContext.budget = '₹10,000 - ₹25,000';
+    } else if (lowerMessage.includes('₹25,000') || lowerMessage.includes('25000')) {
+      newContext.budget = '₹25,000 - ₹50,000';
+    } else if (lowerMessage.includes('₹50,000') || lowerMessage.includes('50000')) {
+      newContext.budget = '₹50,000+';
+    }
+
+    // Timeline detection
+    if (lowerMessage.includes('rush') || lowerMessage.includes('urgent') || lowerMessage.includes('fast')) {
+      newContext.timeline = 'rush';
+    } else if (lowerMessage.includes('1 week') || lowerMessage.includes('week')) {
+      newContext.timeline = '1 week';
+    } else if (lowerMessage.includes('2 week') || lowerMessage.includes('two week')) {
+      newContext.timeline = '2 weeks';
+    }
+
+    // Update context
+    setUserContext(newContext);
+
+    // Enhanced keyword matching with context
+    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate') || lowerMessage.includes('budget')) {
       response = chatbotResponses.pricing;
-    } else if (lowerMessage.includes('time') || lowerMessage.includes('duration') || lowerMessage.includes('how long')) {
+    } else if (lowerMessage.includes('time') || lowerMessage.includes('duration') || lowerMessage.includes('how long') || lowerMessage.includes('timeline')) {
       response = chatbotResponses.timeline;
-    } else if (lowerMessage.includes('software') || lowerMessage.includes('tool') || lowerMessage.includes('premiere') || lowerMessage.includes('davinci')) {
+    } else if (lowerMessage.includes('software') || lowerMessage.includes('tool') || lowerMessage.includes('premiere') || lowerMessage.includes('davinci') || lowerMessage.includes('capcut')) {
       response = chatbotResponses.software;
-    } else if (lowerMessage.includes('service') || lowerMessage.includes('what do you do') || lowerMessage.includes('offer')) {
+    } else if (lowerMessage.includes('service') || lowerMessage.includes('what do you do') || lowerMessage.includes('offer') || lowerMessage.includes('help')) {
       response = chatbotResponses.services;
-    } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('sample')) {
+    } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('sample') || lowerMessage.includes('example')) {
       response = chatbotResponses.portfolio;
-    } else if (lowerMessage.includes('consult') || lowerMessage.includes('meet') || lowerMessage.includes('schedule')) {
+    } else if (lowerMessage.includes('consult') || lowerMessage.includes('meet') || lowerMessage.includes('schedule') || lowerMessage.includes('appointment')) {
       response = chatbotResponses.consultation;
-    } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
+    } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone') || lowerMessage.includes('reach')) {
       response = chatbotResponses.contact;
+    } else if (lowerMessage.includes('project') || lowerMessage.includes('brief') || lowerMessage.includes('plan')) {
+      response = chatbotResponses.project_brief;
+    } else if (lowerMessage.includes('testimonial') || lowerMessage.includes('review') || lowerMessage.includes('client')) {
+      response = chatbotResponses.testimonials;
+    } else if (lowerMessage.includes('rush') || lowerMessage.includes('urgent') || lowerMessage.includes('fast')) {
+      response = chatbotResponses.rush_job;
     } else {
-      // Default response for unrecognized queries
+      // Enhanced default response
       response = {
-        message: "I understand you're asking about video editing. Could you be more specific? I can help with pricing, timelines, software, services, or scheduling a consultation.",
-        quickReplies: ['Pricing', 'Timeline', 'Services', 'Schedule Consultation']
+        message: "I'd love to help you with your video project! 🎬 Could you tell me more about what you're looking for? I can help with pricing, timelines, project planning, or scheduling a consultation.",
+        quickReplies: ['Pricing', 'Timeline', 'Project Brief', 'Services', 'Schedule Consultation']
       };
     }
 
@@ -157,13 +276,20 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
       setIsTyping(true);
       setShowQuickReplies(false);
 
-      // Simulate AI processing
+      // Track user message
+      trackConversation('user_message', { 
+        message: chatMessage,
+        context: userContext 
+      });
+
+      // Simulate AI processing with variable timing
+      const processingTime = Math.random() * 1000 + 500; // 500-1500ms
       setTimeout(() => {
         const response = processMessage(chatMessage);
         const botMessage = {
           id: Date.now() + 1,
           type: 'bot',
-          message: response.message,
+          message: typeof response.message === 'function' ? response.message(userContext) : response.message,
           timestamp: new Date(),
           quickReplies: response.quickReplies
         };
@@ -171,7 +297,18 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
         setChatHistory(prev => [...prev, botMessage]);
         setIsTyping(false);
         setShowQuickReplies(true);
-      }, 1000);
+
+        // Show feedback after 3 bot responses
+        if (chatHistory.filter(msg => msg.type === 'bot').length >= 2) {
+          setShowFeedback(true);
+        }
+
+        // Track bot response
+        trackConversation('bot_response', { 
+          responseType: Object.keys(chatbotResponses).find(key => chatbotResponses[key] === response),
+          context: userContext 
+        });
+      }, processingTime);
     }
   };
 
@@ -188,11 +325,18 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
     setIsTyping(true);
     setShowQuickReplies(false);
 
+    // Track quick reply
+    trackConversation('quick_reply', { 
+      reply,
+      context: userContext 
+    });
+
+    const processingTime = Math.random() * 800 + 400; // 400-1200ms for quick replies
     setTimeout(() => {
       const botMessage = {
         id: Date.now() + 1,
         type: 'bot',
-        message: response.message,
+        message: typeof response.message === 'function' ? response.message(userContext) : response.message,
         timestamp: new Date(),
         quickReplies: response.quickReplies
       };
@@ -200,7 +344,13 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
       setChatHistory(prev => [...prev, botMessage]);
       setIsTyping(false);
       setShowQuickReplies(true);
-    }, 1000);
+
+      // Track bot response
+      trackConversation('bot_response', { 
+        responseType: Object.keys(chatbotResponses).find(key => chatbotResponses[key] === response),
+        context: userContext 
+      });
+    }, processingTime);
   };
 
   const handleKeyPress = (e) => {
@@ -312,6 +462,41 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
           </div>
         </div>
 
+        {/* Floating Chat Button */}
+        {!isChatOpen && (
+          <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 animate-bounce-in">
+            <button
+              onClick={handleChatToggle}
+              className="w-12 h-12 md:w-14 md:h-14 bg-conversion hover:bg-conversion/90 text-conversion-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative"
+              title="Start Chat with AI Assistant"
+            >
+              <Icon name="MessageCircle" size={20} className="md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
+              
+              {/* Hover effect */}
+              <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+            
+            {/* Pulse animation */}
+            <div className="absolute inset-0 w-12 h-12 md:w-14 md:h-14 bg-conversion/30 rounded-full animate-ping"></div>
+            
+            {/* Notification badge */}
+            <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-accent rounded-full flex items-center justify-center shadow-md">
+              <span className="text-xs font-bold text-accent-foreground">AI</span>
+            </div>
+            
+            {/* "New" indicator */}
+            <div className="absolute -bottom-1 -left-1 px-1.5 py-0.5 md:px-2 md:py-1 bg-success text-success-foreground text-xs font-bold rounded-full shadow-md animate-pulse">
+              New
+            </div>
+            
+            {/* Tooltip */}
+            <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-foreground text-background text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              Chat with AI Assistant
+              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground"></div>
+            </div>
+          </div>
+        )}
+
         {/* Enhanced AI Chat Widget */}
         {isChatOpen && (
           <div className="fixed bottom-6 right-6 w-96 bg-card rounded-2xl cinematic-shadow border border-border z-50">
@@ -322,20 +507,79 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
                 </div>
                 <div>
                   <div className="font-medium text-foreground">AI Assistant</div>
-                  <div className="text-xs text-success">Online now</div>
+                  <div className="text-xs text-success flex items-center">
+                    <div className="w-2 h-2 bg-success rounded-full mr-1 animate-pulse"></div>
+                    Online now
+                  </div>
                 </div>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleChatToggle}
-                className="text-text-secondary hover:text-foreground"
-              >
-                <Icon name="X" size={16} />
-              </Button>
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    setChatHistory([
+                      {
+                        id: Date.now(),
+                        type: 'bot',
+                        message: "Hi! 👋 I'm Ujjwal's AI assistant. I can help you with video editing questions, project planning, and scheduling consultations. What would you like to know today?",
+                        timestamp: new Date()
+                      }
+                    ]);
+                    setUserContext({
+                      projectType: null,
+                      budget: null,
+                      timeline: null,
+                      experience: null
+                    });
+                    setConversationStep('initial');
+                    trackConversation('chat_reset', {});
+                  }}
+                  className="text-text-secondary hover:text-foreground"
+                  title="Reset Chat"
+                >
+                  <Icon name="RotateCcw" size={14} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    handleChatToggle();
+                    setShowFeedback(false);
+                  }}
+                  className="text-text-secondary hover:text-foreground"
+                  title="Minimize Chat"
+                >
+                  <Icon name="Minus" size={16} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    handleChatToggle();
+                    setShowFeedback(false);
+                  }}
+                  className="text-text-secondary hover:text-foreground"
+                  title="Close Chat"
+                >
+                  <Icon name="X" size={16} />
+                </Button>
+              </div>
             </div>
             
             <div className="p-4 h-80 overflow-y-auto">
+              {/* Context Indicator */}
+              {(userContext.projectType || userContext.budget || userContext.timeline) && (
+                <div className="mb-4 p-3 bg-accent/10 rounded-lg border border-accent/20">
+                  <div className="text-xs font-medium text-accent mb-2">I understand:</div>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    {userContext.projectType && <div>• Project: {userContext.projectType} video</div>}
+                    {userContext.budget && <div>• Budget: {userContext.budget}</div>}
+                    {userContext.timeline && <div>• Timeline: {userContext.timeline}</div>}
+                  </div>
+                </div>
+              )}
+              
               {chatHistory.map((msg) => (
                 <div key={msg.id} className={`mb-4 ${msg.type === 'user' ? 'text-right' : 'text-left'}`}>
                   <div className={`inline-block max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
@@ -380,6 +624,42 @@ const ContactMethods = ({ isChatOpen = false, setIsChatOpen = () => {} }) => {
             </div>
             
             <div className="p-4 border-t border-border">
+              {/* Feedback Section */}
+              {showFeedback && (
+                <div className="mb-3 p-3 bg-muted/30 rounded-lg">
+                  <div className="text-xs font-medium text-foreground mb-2">How was this conversation?</div>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => {
+                        trackConversation('feedback', { rating: 'positive' });
+                        setShowFeedback(false);
+                      }}
+                      className="flex-1 py-1 px-2 bg-success/10 text-success rounded text-xs hover:bg-success/20 transition-colors"
+                    >
+                      👍 Helpful
+                    </button>
+                    <button
+                      onClick={() => {
+                        trackConversation('feedback', { rating: 'neutral' });
+                        setShowFeedback(false);
+                      }}
+                      className="flex-1 py-1 px-2 bg-muted text-muted-foreground rounded text-xs hover:bg-muted/80 transition-colors"
+                    >
+                      😐 Okay
+                    </button>
+                    <button
+                      onClick={() => {
+                        trackConversation('feedback', { rating: 'negative' });
+                        setShowFeedback(false);
+                      }}
+                      className="flex-1 py-1 px-2 bg-error/10 text-error rounded text-xs hover:bg-error/20 transition-colors"
+                    >
+                      👎 Not Helpful
+                    </button>
+                  </div>
+                </div>
+              )}
+              
               <div className="flex space-x-2">
                 <input
                   type="text"

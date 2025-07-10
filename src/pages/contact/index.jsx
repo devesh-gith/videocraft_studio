@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import ContactHero from './components/ContactHero';
 import ContactForm from './components/ContactForm';
 import ConsultationBooking from './components/ConsultationBooking';
@@ -32,7 +33,7 @@ const Contact = () => {
       <Helmet>
         <title>Contact Us - VideoCraft Studio | Free Consultation & Project Brief</title>
         <meta name="description" content="Get in touch with VideoCraft Studio for your video production needs. Book a free consultation, submit your project brief, or contact us directly. Fast response guaranteed." />
-        <meta name="keywords" content="video production contact, free consultation, project brief, video editing services, Studio City video production" />
+        <meta name="keywords" content="video production contact, free consultation, project brief, video editing services, Gurugram video production" />
         <meta property="og:title" content="Contact VideoCraft Studio - Free Consultation Available" />
         <meta property="og:description" content="Ready to bring your vision to life? Contact VideoCraft Studio for professional video production services. Free consultation and 24-hour response time guaranteed." />
         <meta property="og:type" content="website" />
@@ -82,10 +83,10 @@ const Contact = () => {
                 </button>
                 
                 <a
-                  href="mailto:hello@videocraftstudio.com"
+                  href="mailto:ujjwalchoudhary994@gmail.com"
                   className="inline-flex items-center space-x-2 text-accent hover:text-accent/80 smooth-transition"
                 >
-                  <span>hello@videocraftstudio.com</span>
+                  <span>ujjwalchoudhary994@gmail.com</span>
                 </a>
               </div>
               
@@ -109,6 +110,8 @@ const Contact = () => {
           </div>
         </section>
       </main>
+      
+      <Footer />
     </div>
   );
 };

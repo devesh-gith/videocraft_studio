@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import HeroSection from './components/HeroSection';
 import JourneyTimeline from './components/JourneyTimeline';
 import BehindTheScenes from './components/BehindTheScenes';
@@ -24,6 +25,8 @@ const About = () => {
         <TechnicalExpertise />
         <PersonalTouch />
       </main>
+      
+      <Footer />
     </div>
   );
 };

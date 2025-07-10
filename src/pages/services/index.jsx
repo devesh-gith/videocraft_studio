@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import ServiceHero from './components/ServiceHero';
 import ServiceCard from './components/ServiceCard';
 import ProcessSection from './components/ProcessSection';
@@ -209,63 +210,7 @@ const ServicesPage = () => {
       {/* CTA Section */}
       <CTASection />
 
-      {/* Footer */}
-      <footer className="bg-primary border-t border-border py-12">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-accent to-conversion rounded-lg flex items-center justify-center">
-                  <Icon name="Video" size={24} color="#1A1A1A" strokeWidth={2.5} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-headline font-bold text-foreground">VideoCraft</h3>
-                  <p className="text-xs text-muted-foreground font-medium tracking-wide">STUDIO</p>
-                </div>
-              </div>
-              <p className="text-muted-foreground mb-6 max-w-md">
-                Crafting compelling video content that captivates audiences and drives results. Your story, expertly told.
-              </p>
-              <div className="flex items-center space-x-4">
-                <Icon name="Mail" size={20} className="text-accent" />
-                <span className="text-foreground">hello@videocraftstudio.com</span>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Services</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Corporate Videos</li>
-                <li>Social Media Content</li>
-                <li>Brand Storytelling</li>
-                <li>Training Videos</li>
-                <li>Promotional Content</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>About Us</li>
-                <li>Portfolio</li>
-                <li>Process</li>
-                <li>Contact</li>
-                <li>Blog</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} VideoCraft Studio. All rights reserved.
-            </p>
-            <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <span className="text-sm text-muted-foreground">Privacy Policy</span>
-              <span className="text-sm text-muted-foreground">Terms of Service</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

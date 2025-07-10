@@ -6,6 +6,9 @@ const ConsultationBooking = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
 
   // Mock available time slots
   const timeSlots = [
@@ -59,8 +62,62 @@ const ConsultationBooking = () => {
   };
 
   const handleBookConsultation = () => {
-    if (selectedDate && selectedTime) {
-      alert(`Consultation booked for ${selectedDate.toLocaleDateString()} at ${selectedTime}. You'll receive a confirmation email shortly.`);
+    if (selectedDate && selectedTime && email) {
+      setIsSubmitting(true);
+      
+      // Simulate API call
+      setTimeout(() => {
+        // Generate Google Meet link (in real implementation, this would be from your backend)
+        const meetLink = `https://meet.google.com/${Math.random().toString(36).substring(2, 15)}`;
+        
+        // Send email with Google Meet link
+        const subject = encodeURIComponent('Your VideoCraft Studio Consultation Confirmation');
+        const body = encodeURIComponent(
+          `Hi there!
+
+Thank you for booking your free consultation with VideoCraft Studio!
+
+📅 Consultation Details:
+Date: ${selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+Time: ${selectedTime} IST
+Duration: 30 minutes
+
+🎥 Google Meet Link:
+${meetLink}
+
+Please join the meeting 5 minutes before your scheduled time.
+
+What to expect:
+• 30-minute strategy session
+• Project vision discussion
+• Custom proposal within 24 hours
+• No obligation, completely free
+
+If you need to reschedule or have any questions, please reply to this email or call us at +91 8887967394.
+
+Looking forward to discussing your project!
+
+Best regards,
+Ujjwal Kumar Choudhary
+VideoCraft Studio
++91 8887967394
+ujjwalchoudhary994@gmail.com`
+        );
+        
+        // Open email client with pre-filled details
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        
+        setIsSubmitting(false);
+        setIsBooked(true);
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsBooked(false);
+          setSelectedDate(null);
+          setSelectedTime(null);
+          setEmail('');
+        }, 3000);
+      }, 1500);
     }
   };
 
@@ -211,6 +268,35 @@ const ConsultationBooking = () => {
               )}
             </div>
 
+            {/* Email Input */}
+            {selectedDate && selectedTime && (
+              <div className="bg-card rounded-2xl cinematic-shadow p-8">
+                <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
+                  Contact Information
+                </h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email address"
+                      className="w-full px-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                      required
+                    />
+                    <p className="text-xs text-text-secondary mt-1">
+                      We'll send the Google Meet link and confirmation to this email
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Consultation Details */}
             <div className="bg-card rounded-2xl cinematic-shadow p-8">
               <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
@@ -251,14 +337,27 @@ const ConsultationBooking = () => {
                 </div>
               </div>
 
-              {selectedDate && selectedTime && (
+              {selectedDate && selectedTime && email && (
                 <div className="mt-8 p-4 bg-accent/10 rounded-lg border border-accent/20">
                   <div className="flex items-center space-x-2 text-accent mb-2">
                     <Icon name="CheckCircle" size={16} />
                     <span className="font-medium">Ready to Book</span>
                   </div>
+                  <div className="text-sm text-foreground space-y-1">
+                    <div>{selectedDate.toLocaleDateString()} at {selectedTime}</div>
+                    <div className="text-text-secondary">Email: {email}</div>
+                  </div>
+                </div>
+              )}
+
+              {isBooked && (
+                <div className="mt-8 p-4 bg-success/10 rounded-lg border border-success/20">
+                  <div className="flex items-center space-x-2 text-success mb-2">
+                    <Icon name="CheckCircle" size={16} />
+                    <span className="font-medium">Consultation Booked!</span>
+                  </div>
                   <div className="text-sm text-foreground">
-                    {selectedDate.toLocaleDateString()} at {selectedTime}
+                    Check your email for the Google Meet link and confirmation details.
                   </div>
                 </div>
               )}
@@ -268,13 +367,13 @@ const ConsultationBooking = () => {
                 size="lg"
                 fullWidth
                 className="mt-6 bg-conversion hover:bg-conversion/90 text-conversion-foreground"
-                iconName="Calendar"
+                iconName={isSubmitting ? "Loader2" : "Calendar"}
                 iconPosition="left"
                 iconSize={18}
                 onClick={handleBookConsultation}
-                disabled={!selectedDate || !selectedTime}
+                disabled={!selectedDate || !selectedTime || !email || isSubmitting}
               >
-                Confirm Consultation
+                {isSubmitting ? 'Sending Confirmation...' : 'Confirm Consultation'}
               </Button>
             </div>
           </div>

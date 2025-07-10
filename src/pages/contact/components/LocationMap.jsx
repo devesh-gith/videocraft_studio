@@ -2,9 +2,9 @@ import React from 'react';
 import Icon from '../../../components/AppIcon';
 
 const LocationMap = () => {
-  // Mock studio location coordinates (Studio City, CA)
-  const studioLat = 34.1394;
-  const studioLng = -118.3957;
+  // Studio location coordinates (Tulip Lemon, Sector-69, Gurugram)
+  const studioLat = 28.39632025102484;
+  const studioLng = 77.03602437217438;
 
   const studioInfo = {
     name: "Ujjwal Kumar Choudhary",
@@ -20,10 +20,10 @@ const LocationMap = () => {
   };
 
   const nearbyLandmarks = [
-    { name: "Universal Studios", distance: "2.1 miles" },
-    { name: "Hollywood Bowl", distance: "3.4 miles" },
-    { name: "Griffith Observatory", distance: "4.2 miles" },
-    { name: "LAX Airport", distance: "18 miles" }
+    { name: "Cyber City", distance: "3.2 km" },
+    { name: "DLF CyberHub", distance: "4.1 km" },
+    { name: "Ambience Mall", distance: "5.8 km" },
+    { name: "Indira Gandhi International Airport", distance: "12 km" }
   ];
 
   return (
@@ -34,12 +34,12 @@ const LocationMap = () => {
             Visit Our Studio
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            Located in the heart of Studio City, our creative space is designed for collaboration and inspiration.
+            Located in the heart of Gurugram, our creative space is designed for collaboration and inspiration.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Map */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Map - Top Left */}
           <div className="bg-card rounded-2xl cinematic-shadow overflow-hidden">
             <div className="aspect-video relative">
               <iframe
@@ -64,117 +64,114 @@ const LocationMap = () => {
             </div>
           </div>
 
-          {/* Studio Information */}
-          <div className="space-y-8">
-            {/* Contact Details */}
-            <div className="bg-card rounded-2xl cinematic-shadow p-8">
-              <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
-                Studio Information
-              </h3>
+          {/* Studio Information - Top Right */}
+          <div className="bg-card rounded-2xl cinematic-shadow p-6">
+            <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
+              Studio Information
+            </h3>
+            
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <Icon name="MapPin" size={20} className="text-accent mt-0.5" />
+                <div>
+                  <div className="font-medium text-foreground">Address</div>
+                  <div className="text-sm text-text-secondary">{studioInfo.address}</div>
+                </div>
+              </div>
               
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <Icon name="MapPin" size={20} className="text-accent mt-0.5" />
-                  <div>
-                    <div className="font-medium text-foreground">Address</div>
-                    <div className="text-sm text-text-secondary">{studioInfo.address}</div>
-                  </div>
+              <div className="flex items-start space-x-3">
+                <Icon name="Phone" size={20} className="text-accent mt-0.5" />
+                <div>
+                  <div className="font-medium text-foreground">Phone</div>
+                  <a 
+                    href={`tel:${studioInfo.phone}`}
+                    className="text-sm text-accent hover:text-accent/80 smooth-transition"
+                  >
+                    {studioInfo.phone}
+                  </a>
                 </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Icon name="Phone" size={20} className="text-accent mt-0.5" />
-                  <div>
-                    <div className="font-medium text-foreground">Phone</div>
-                    <a 
-                      href={`tel:${studioInfo.phone}`}
-                      className="text-sm text-accent hover:text-accent/80 smooth-transition"
-                    >
-                      {studioInfo.phone}
-                    </a>
-                  </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <Icon name="Mail" size={20} className="text-accent mt-0.5" />
+                <div>
+                  <div className="font-medium text-foreground">Email</div>
+                  <a 
+                    href={`mailto:${studioInfo.email}`}
+                    className="text-sm text-accent hover:text-accent/80 smooth-transition"
+                  >
+                    {studioInfo.email}
+                  </a>
                 </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Icon name="Mail" size={20} className="text-accent mt-0.5" />
-                  <div>
-                    <div className="font-medium text-foreground">Email</div>
-                    <a 
-                      href={`mailto:${studioInfo.email}`}
-                      className="text-sm text-accent hover:text-accent/80 smooth-transition"
-                    >
-                      {studioInfo.email}
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Icon name="Clock" size={20} className="text-accent mt-0.5" />
-                  <div>
-                    <div className="font-medium text-foreground">Hours</div>
-                    <div className="text-sm text-text-secondary">
-                      <div>{studioInfo.hours.weekdays}</div>
-                      <div>{studioInfo.hours.weekend}</div>
-                    </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <Icon name="Clock" size={20} className="text-accent mt-0.5" />
+                <div>
+                  <div className="font-medium text-foreground">Hours</div>
+                  <div className="text-sm text-text-secondary">
+                    <div>{studioInfo.hours.weekdays}</div>
+                    <div>{studioInfo.hours.weekend}</div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Amenities */}
-            <div className="bg-card rounded-2xl cinematic-shadow p-8">
-              <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
-                Studio Amenities
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex items-center space-x-3">
-                  <Icon name="Car" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">Free Parking</span>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <Icon name="Accessibility" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">Wheelchair Access</span>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <Icon name="Wifi" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">High-Speed WiFi</span>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <Icon name="Coffee" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">Refreshments</span>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <Icon name="Monitor" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">4K Monitors</span>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <Icon name="Volume2" size={16} className="text-success" />
-                  <span className="text-sm text-foreground">Pro Audio Setup</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Nearby Landmarks */}
-            <div className="bg-card rounded-2xl cinematic-shadow p-8">
-              <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
-                Nearby Landmarks
-              </h3>
-              
-              <div className="space-y-3">
-                {nearbyLandmarks.map((landmark, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Navigation" size={16} className="text-text-secondary" />
-                      <span className="text-sm text-foreground">{landmark.name}</span>
-                    </div>
-                    <span className="text-sm text-text-secondary">{landmark.distance}</span>
+          {/* Nearby Landmarks - Bottom Left */}
+          <div className="bg-card rounded-2xl cinematic-shadow p-6">
+            <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
+              Nearby Landmarks
+            </h3>
+            
+            <div className="space-y-4">
+              {nearbyLandmarks.map((landmark, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Icon name="Navigation" size={18} className="text-text-secondary" />
+                    <span className="text-foreground">{landmark.name}</span>
                   </div>
-                ))}
+                  <span className="text-sm text-text-secondary font-medium">{landmark.distance}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Studio Amenities - Bottom Right */}
+          <div className="bg-card rounded-2xl cinematic-shadow p-6">
+            <h3 className="text-xl font-headline font-semibold text-foreground mb-6">
+              Studio Amenities
+            </h3>
+            
+            <div className="grid grid-cols-1 gap-4">
+              <div className="flex items-center space-x-3">
+                <Icon name="Car" size={18} className="text-success" />
+                <span className="text-foreground">Free Parking</span>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <Icon name="Accessibility" size={18} className="text-success" />
+                <span className="text-foreground">Wheelchair Access</span>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <Icon name="Wifi" size={18} className="text-success" />
+                <span className="text-foreground">High-Speed WiFi</span>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <Icon name="Coffee" size={18} className="text-success" />
+                <span className="text-foreground">Refreshments</span>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <Icon name="Monitor" size={18} className="text-success" />
+                <span className="text-foreground">4K Monitors</span>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <Icon name="Volume2" size={18} className="text-success" />
+                <span className="text-foreground">Pro Audio Setup</span>
               </div>
             </div>
           </div>

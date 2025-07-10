@@ -200,7 +200,7 @@ const PricingCalculator = () => {
           {/* Estimate Display */}
           <div className="bg-gradient-to-br from-accent/10 to-conversion/10 rounded-2xl border border-accent/20 p-8 h-fit sticky top-8">
             <div className="text-center mb-8">
-              <Icon name="DollarSign" size={48} className="text-accent mx-auto mb-4" />
+              <Icon name="IndianRupee" size={48} className="text-accent mx-auto mb-4" />
               <h3 className="text-2xl font-headline font-bold text-foreground mb-2">
                 Project Estimate
               </h3>

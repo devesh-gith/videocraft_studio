@@ -119,25 +119,39 @@ const CTASection = () => {
 
         {/* Contact Options */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="text-center p-6 bg-card/50 rounded-xl border border-border">
+          <div className="text-center p-6 bg-card/50 rounded-xl border border-border hover:border-trust/40 transition-all duration-300">
             <Icon name="Phone" size={24} className="text-trust mx-auto mb-3" />
             <h4 className="font-semibold text-foreground mb-2">Call Us</h4>
             <p className="text-sm text-muted-foreground mb-3">Speak directly with our team</p>
-            <p className="text-trust font-medium">+1 (555) 123-4567</p>
+            <a 
+              href="tel:+918887967394"
+              className="text-trust font-medium hover:text-trust/80 transition-colors"
+            >
+              +91 8887967394
+            </a>
           </div>
           
-          <div className="text-center p-6 bg-card/50 rounded-xl border border-border">
+          <div className="text-center p-6 bg-card/50 rounded-xl border border-border hover:border-accent/40 transition-all duration-300">
             <Icon name="Mail" size={24} className="text-accent mx-auto mb-3" />
             <h4 className="font-semibold text-foreground mb-2">Email Us</h4>
             <p className="text-sm text-muted-foreground mb-3">Get detailed project information</p>
-            <p className="text-accent font-medium">hello@videocraftstudio.com</p>
+            <a 
+              href="mailto:ujjwalchoudhary994@gmail.com"
+              className="text-accent font-medium hover:text-accent/80 transition-colors"
+            >
+              ujjwalchoudhary994@gmail.com
+            </a>
           </div>
           
-          <div className="text-center p-6 bg-card/50 rounded-xl border border-border">
+          <div className="text-center p-6 bg-card/50 rounded-xl border border-border hover:border-conversion/40 transition-all duration-300">
             <Icon name="MessageSquare" size={24} className="text-conversion mx-auto mb-3" />
             <h4 className="font-semibold text-foreground mb-2">Live Chat</h4>
             <p className="text-sm text-muted-foreground mb-3">Instant support available</p>
-            <p className="text-conversion font-medium">Start Chat</p>
+            <Link to="/contact#live-chat">
+              <span className="text-conversion font-medium hover:text-conversion/80 transition-colors cursor-pointer">
+                Start Chat
+              </span>
+            </Link>
           </div>
         </div>
 

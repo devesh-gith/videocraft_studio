@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
 
 const projects = [
   {
@@ -69,6 +70,8 @@ const PortfolioPage = () => {
           ))}
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 };

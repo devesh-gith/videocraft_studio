@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import BlogHero from './components/BlogHero';
 import CategoryFilter from './components/CategoryFilter';
 import FeaturedPost from './components/FeaturedPost';
@@ -424,6 +425,8 @@ const Blog = () => {
             </div>
           </div>
         </section>
+        
+        <Footer />
       </div>
     </>
   );
